@@ -27,3 +27,6 @@ opt.winborder = "rounded" -- Use rounded borders for windows
 opt.hlsearch = false -- Disable highlighting of search results
 
 vim.cmd.filetype("plugin indent on") -- Enable filetype detection, plugins, and indentation
+
+-- Disable autocomment pressing on new line
+vim.cmd([[autocmd FileType * set formatoptions-=ro]])

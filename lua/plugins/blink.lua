@@ -1,4 +1,7 @@
 vim.pack.add({
+    { src = "https://github.com/L3MON4D3/LuaSnip" },
+})
+vim.pack.add({
     { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("^1") },
 })
 
@@ -9,8 +12,8 @@ require("blink.cmp").setup({
         preset = "default",
         ["<C-space>"] = {},
         ["<C-p>"] = {},
-        ["<Tab>"] = {},
-        ["<S-Tab>"] = {},
+        ["<Tab>"] = { "snippet_forward" },
+        ["<S-Tab>"] = { "snippet_backward" },
         ["<C-y>"] = { "show", "show_documentation", "hide_documentation" },
         ["<C-n>"] = { "select_and_accept" },
         ["<C-k>"] = { "select_prev", "fallback" },
@@ -41,5 +44,11 @@ require("blink.cmp").setup({
         },
     },
 
-    sources = { default = { "lsp" } },
+    sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+    },
+
+    snippets = {
+        preset = 'luasnip'
+    },
 })
