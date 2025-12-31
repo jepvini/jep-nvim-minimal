@@ -17,14 +17,14 @@ keymap("v", "<leader>S", ":sort<cr>") -- sort visual selected lines
 keymap("n", "<leader>q", "q")         -- macro
 
 -- testing
-keymap("n", "<Leader>te", "<cmd>tabnew<CR>", s)              -- Open a new tab
-keymap("n", "<Leader>_", "<cmd>vsplit<CR>", s)               -- Split the window vertically
-keymap("n", "<Leader>-", "<cmd>split<CR>", s)                -- Split the window horizontally
+keymap("n", "<Leader>te", "<cmd>tabnew<CR>", s)               -- Open a new tab
+keymap("n", "<Leader>_", "<cmd>vsplit<CR>", s)                -- Split the window vertically
+keymap("n", "<Leader>-", "<cmd>split<CR>", s)                 -- Split the window horizontally
 
-keymap("n", "<Leader>g", ":lua vim.lsp.buf.format()<CR>", s) -- Format the current buffer using LSP
-keymap("v", "<Leader>p", '"_dP')                             -- Paste without overwriting the default register
-keymap("x", "y", [["+y]], s)                                 -- Yank to the system clipboard in visual mode
-keymap("t", "<Esc>", "<C-\\><C-N>")                          -- Exit terminal mode
+keymap("n", "<Leader>jk", ":lua vim.lsp.buf.format()<CR>", s) -- Format the current buffer using LSP
+keymap("v", "<Leader>p", '"_dP')                              -- Paste without overwriting the default register
+keymap("x", "y", [["+y]], s)                                  -- Yank to the system clipboard in visual mode
+keymap("t", "<Esc>", "<C-\\><C-N>")                           -- Exit terminal mode
 
 -- Change directory to the current file's directory
 keymap("n", "<leader>CD", '<cmd>lua vim.fn.chdir(vim.fn.expand("%:p:h"))<CR>')
