@@ -1,0 +1,25 @@
+vim.pack.add({
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+})
+require 'nvim-treesitter'.install {
+    'bash',
+    'bitbake',
+    'c',
+    'cmake',
+    'cpp',
+    'css',
+    'dockerfile',
+    'gitignore',
+    'json',
+    'latex',
+    'lua',
+    'nix',
+    'python',
+    'regex',
+    'scss',
+    'ssh_config',
+    'sway',
+    'typst',
+    'yaml',
+    'zsh',
+}

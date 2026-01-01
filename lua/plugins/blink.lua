@@ -1,5 +1,5 @@
 vim.pack.add({
-    { src = "https://github.com/L3MON4D3/LuaSnip" },
+    { src = "https://github.com/rafamadriz/friendly-snippets" },
 })
 vim.pack.add({
     { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("^1") },
@@ -46,9 +46,5 @@ require("blink.cmp").setup({
 
     sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
-    },
-
-    snippets = {
-        preset = 'luasnip'
     },
 })
