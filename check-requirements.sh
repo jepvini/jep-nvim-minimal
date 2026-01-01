@@ -10,7 +10,7 @@ check_version() {
         echo "try to run this script with the --install-nvim parameter"
         exit
     else
-        echo "nvim good"
+        echo "✓ nvim good"
     fi
 }
 
@@ -21,10 +21,10 @@ check_shell() {
 
 check_pkg() {
     if ! which "$1" 2> /dev/null 1>&2; then
-        echo "$1 not installed"
-        exit
+        echo "✗ $1 not installed"
     else
-        echo "$1 good"
+        sleep 0.1 # fancy code is running
+        echo "✓ $1 good"
     fi
 }
 
