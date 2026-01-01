@@ -21,7 +21,7 @@ keymap("n", "<Leader>te", "<cmd>tabnew<CR>", s)               -- Open a new tab
 keymap("n", "<Leader>_", "<cmd>vsplit<CR>", s)                -- Split the window vertically
 keymap("n", "<Leader>-", "<cmd>split<CR>", s)                 -- Split the window horizontally
 
-keymap("n", "<Leader>jk", ":lua vim.lsp.buf.format()<CR>", s) -- Format the current buffer using LSP
+keymap("n", "<Leader>jk", ":Format<CR>", s) -- Format the current buffer using LSP
 keymap("v", "<Leader>p", '"_dP')                              -- Paste without overwriting the default register
 keymap("x", "y", [["+y]], s)                                  -- Yank to the system clipboard in visual mode
 keymap("t", "<Esc>", "<C-\\><C-N>")                           -- Exit terminal mode
@@ -33,7 +33,15 @@ keymap("n", "<leader>CD", '<cmd>lua vim.fn.chdir(vim.fn.expand("%:p:h"))<CR>')
 keymap("n", "<leader>ps", "<cmd>lua vim.pack.update()<CR>")
 
 local opts = { noremap = true, silent = true }
-keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts) -- Go to definition
+keymap("n", "<leader>i", "<cmd>lua vim.lsp.buf.hover()<cr>")
+keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
+keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
+keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>")
+keymap("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>")
+keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
+keymap("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
+keymap("n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>")
+keymap("n", "<leader>nn", "<cmd>lua vim.lsp.buf.rename()<cr>")
 
 
 -- fzf
