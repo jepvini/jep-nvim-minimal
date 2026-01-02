@@ -2,29 +2,19 @@ vim.pack.add({
     { src = "https://github.com/ibhagwan/fzf-lua" },
 })
 
-local actions = require("fzf-lua.actions")
-require("fzf-lua").setup({
-    winopts = { backdrop = 85 },
+require('fzf-lua').setup({
     keymap = {
+        -- Below are the default binds, setting any value in these tables will override
+        -- the defaults, to inherit from the defaults change [1] from `false` to `true`
         builtin = {
-            ["<C-f>"] = "preview-page-down",
-            ["<C-b>"] = "preview-page-up",
-            ["<C-p>"] = "toggle-preview",
-        },
-        fzf = {
-            ["ctrl-a"] = "toggle-all",
-            ["ctrl-t"] = "first",
-            ["ctrl-g"] = "last",
-            ["ctrl-d"] = "half-page-down",
-            ["ctrl-u"] = "half-page-up",
+            -- neovim `:tmap` mappings for the fzf win
+            -- true,        -- uncomment to inherit all the below in your custom config
+            ["<C-h>"] = "hide",
         },
     },
     actions = {
         files = {
-            ["ctrl-q"] = actions.file_sel_to_qf,
-            ["ctrl-n"] = actions.toggle_ignore,
-            ["ctrl-h"] = actions.toggle_hidden,
-            ["enter"] = actions.file_edit_or_qf,
+            ["ctrl-l"] = FzfLua.actions.file_edit_or_qf,
         },
-    },
+    }
 })

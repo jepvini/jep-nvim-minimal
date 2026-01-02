@@ -20,7 +20,7 @@ check_shell() {
 }
 
 check_pkg() {
-    if ! which "$1" 2> /dev/null 1>&2; then
+    if ! which "$1" 1> /dev/null 2>&1; then
         echo "✗ $1 not installed"
     else
         sleep 0.1 # fancy code is running
