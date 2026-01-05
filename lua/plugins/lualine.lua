@@ -8,6 +8,12 @@ vim.pack.add({
 
 require("lualine").setup({
     options = {
+        refresh = {
+            statusline = 50,
+            tabline = 50,
+            winbar = 50,
+            refresh_time = 32, -- ~60fps
+        },
         theme = {
             normal = {
                 a = { bg = "#b4befe", fg = "#1e1e2e", gui = "bold" },
@@ -41,10 +47,10 @@ require("lualine").setup({
             },
         },
         icons_enabled = true,
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
         disabled_filetypes = {
-            statusline = { "NvimTree" },
+            statusline = {},
         },
     },
 
@@ -64,7 +70,7 @@ require("lualine").setup({
                 icon = "",
                 symbols = {
                     -- Standard unicode symbols to cycle through for LSP progress:
-                    spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+                    spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
                     -- Standard unicode symbol for when LSP is done:
                     done = "✓",
                     -- Delimiter inserted between LSP names:
@@ -79,4 +85,5 @@ require("lualine").setup({
         lualine_y = { "progress" },
         lualine_z = { "location" },
     },
+
 })

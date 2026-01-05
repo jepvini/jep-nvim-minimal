@@ -6,7 +6,7 @@ vim.pack.add({
 })
 
 require("blink.cmp").setup({
-    fuzzy = { implementation = "prefer_rust_with_warning" },
+    fuzzy = { implementation = "rust" },
     signature = { enabled = true },
     keymap = {
         preset = "default",
@@ -29,9 +29,10 @@ require("blink.cmp").setup({
     },
 
     completion = {
+        -- keyword = { range = 'prefix' },
         documentation = {
             auto_show = true,
-            auto_show_delay_ms = 200,
+            auto_show_delay_ms = 500,
         },
     },
 
