@@ -4,20 +4,7 @@ REQ_NVIM_VERSION='0.12'
 NVIM_INSTALL_DIR="$HOME/.nvim_nightly"
 NVIM_LOCATION="$NVIM_INSTALL_DIR/nvim-linux-x86_64/bin"
 
-check_version() {
-    if [[ ! "$(nvim --version)" =~ $REQ_NVIM_VERSION ]]; then
-        echo "nvim version not $REQ_NVIM_VERSION"
-        echo "try to run this script with the --install-nvim parameter"
-        exit
-    else
-        echo "✓ nvim good"
-    fi
-}
 
-check_shell() {
-    IFS='/' read -r -a SHELL_ARRAY <<< "$SHELL"
-    SHELL_USED="${SHELL_ARRAY[-1]}"
-}
 
 check_pkg() {
     if ! which "$1" 1> /dev/null 2>&1; then
@@ -25,6 +12,16 @@ check_pkg() {
     else
         sleep 0.1 # fancy code is running
         echo "✓ $1 good"
+    fi
+}
+
+check_nvim_version() {
+    if [[ ! "$(nvim --version 2> /dev/null)" =~ $REQ_NVIM_VERSION ]]; then
+        echo "nvim version not $REQ_NVIM_VERSION"
+        echo "try to run this script with the --install-nvim parameter"
+        exit
+    else
+        echo "✓ nvim good"
     fi
 }
 
@@ -36,15 +33,12 @@ if [[ $1 = --install-nvim ]]; then
     tar -C "$NVIM_INSTALL_DIR" -xzf nvim-linux-x86_64.tar.gz
 
     if [[ ! $PATH =~ $NVIM_LOCATION ]]; then
-        check_shell
-        if [[ $SHELL_USED = zsh ]]; then
-            echo "add $NVIM_LOCATION to your PATH"
-            path
-        fi
+        echo "add $NVIM_LOCATION to your PATH"
     fi
 fi
 
-check_version
+check_pkg nvim
+check_nvim_version
 
 check_pkg git
 check_pkg curl
