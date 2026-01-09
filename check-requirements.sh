@@ -7,11 +7,13 @@ REQ_FZF_VERSION='0.67.0'
 REQ_RIPGREP_VERSION='15.1.0'
 REQ_FD_VERSION='10.3.0'
 REQ_YAZI_VERSION='26.1.4'
+REQ_COMICSHANNSMONO_VERSION='3.4.0'
 
 ROOT_DIR="$HOME/.nvim_nightly"
 NVIM_DEPENDENCY_DIR="$ROOT_DIR/bin"
 NVIM_TAR_DIR="$ROOT_DIR/tar"
 NVIM_LOCATION="$ROOT_DIR/nvim-linux-x86_64/bin"
+FONTS_DIR="$HOME/.local/share/fonts"
 
 check_pkg() {
     if ! which "$1" 1> /dev/null 2>&1; then
@@ -108,6 +110,22 @@ install_yazi () {
     echo "yazi installed"
 }
 
+install_comicshanns () {
+    local name="ComicShannsMono"
+    mkdir -p "$ROOT_DIR"
+    mkdir -p "$NVIM_TAR_DIR"
+    mkdir -p "$FONTS_DIR"
+    mkdir -p "$NVIM_TAR_DIR/$name"
+    cd "$NVIM_TAR_DIR" || exit
+    curl -s -LO "https://github.com/ryanoasis/nerd-fonts/releases/download/v$REQ_COMICSHANNSMONO_VERSION/$name.zip"
+    rm -rf "$name"/*.md
+    rm -rf "$name"/*.otf
+    unzip "$name.zip" -d "./$name" > /dev/null
+    mv "$name"/*.otf "$FONTS_DIR"
+    rm -rf "$name"
+    echo "comicshanns installed"
+}
+
 if [[ $1 = --install-nvim ]]; then
     install_nvim
     exit
@@ -126,6 +144,9 @@ elif [[ $1 = --install-fd ]]; then
 elif [[ $1 = --install-yazi ]]; then
     install_yazi
     check_path
+    exit
+elif [[ $1 = --install-comicshanns ]]; then
+    install_comicshanns
     exit
 elif [[ $1 = --install-all ]]; then
     install_nvim
