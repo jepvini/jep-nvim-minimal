@@ -12,10 +12,10 @@ local options = {
     ensure_installed = {
         "bash-language-server",
         "beautysh",
+        "clangd",
         "lua-language-server",
         "marksman",
         "taplo",
-        "tinymist",
     }, -- not an option from mason.nvim
     max_concurrent_installers = 10,
 }
