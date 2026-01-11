@@ -14,7 +14,7 @@ require('fzf-lua').setup({
     },
     actions = {
         files = {
-            ["ctrl-o"] = FzfLua.actions.file_edit_or_qf,
+            ["enter"] = FzfLua.actions.file_edit_or_qf,
         },
     }
 })
