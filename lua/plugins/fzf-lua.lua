@@ -17,7 +17,4 @@ require('fzf-lua').setup({
             ["enter"] = FzfLua.actions.file_edit_or_qf,
         },
     },
-    manpages = {
-        previewer = "man_native",
-    },
 })

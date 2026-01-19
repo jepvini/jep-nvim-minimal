@@ -15,7 +15,7 @@ keymap({ "n", "x", "v" }, "mm", '"_dd') -- Delete line without putting it to the
 keymap({ "n", "i" }, "<C-l>", "<cmd>bnext<cr>")
 keymap({ "n", "i" }, "<C-h>", "<cmd>bprevious<cr>")
 keymap("v", "<leader>S", ":sort<cr>") -- sort visual selected lines
-keymap("n", "<leader>q", "q")         -- macro as q is quit
+keymap("n", "<leader>q", "q")         -- macro as q is q
 
 -- testing
 keymap("n", "<Leader>_", "<cmd>vnew<CR>", s) -- Split the window vertically
@@ -47,6 +47,13 @@ keymap("n", "<leader>ff", "<cmd>FzfLua files<CR>")
 keymap("n", "<leader>fg", "<cmd>FzfLua live_grep<CR>")
 keymap("n", "<leader>fr", "<cmd>FzfLua registers<CR>")
 keymap("n", "<leader>fm", "<cmd>FzfLua manpages<CR>")
+keymap("n", "<leader>fb", "<cmd>FzfLua buffers<CR>")
+keymap("n", "<leader>fl", "<cmd>FzfLua lsp_live_workspace_symbols<CR>")
+keymap("n", "<leader>fp", "<cmd>FzfLua complete_path<CR>")
+keymap("n", "<leader>gd", "<cmd>FzfLua lsp_definitions<CR>")
+keymap("n", "<leader>gi", "<cmd>FzfLua lsp_implementations<CR>")
+keymap("n", "<leader>x", "<cmd>FzfLua diagnostics_document<CR>")
+keymap("n", "<leader>fx", "<cmd>FzfLua diagnostics_workspace<CR>")
 keymap("n", "<leader>gs", "<cmd>FzfLua git_status<CR>")
 
 -- git signs
@@ -54,7 +61,7 @@ keymap("n", "<leader>gp", "<cmd>Gitsign preview_hunk_inline<CR>")
 keymap("n", "<leader>gb", "<cmd>Gitsign blame_line<CR>")
 
 -- trouble
-keymap("n", "<leader>x", "<cmd>Trouble diagnostics toggle focus=true<cr>")
+-- keymap("n", "<leader>x", "<cmd>Trouble diagnostics toggle focus=true<cr>")
 
 -- yazi
 keymap("n", "<leader>e", function()
