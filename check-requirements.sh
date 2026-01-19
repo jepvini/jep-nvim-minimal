@@ -4,7 +4,6 @@ DEPENDECIES=(curl git tar tree-sitter unzip fzf rg fd yazi)
 
 REQ_NVIM_VERSION='0.12'
 REQ_FZF_VERSION='0.67.0'
-REQ_RIPGREP_VERSION='15.1.0'
 REQ_FD_VERSION='10.3.0'
 REQ_YAZI_VERSION='26.1.4'
 REQ_COMICSHANNSMONO_VERSION='3.4.0'
@@ -16,10 +15,18 @@ NVIM_LOCATION="$ROOT_DIR/nvim-linux-x86_64/bin"
 FONTS_DIR="$HOME/.local/share/fonts"
 
 check_pkg() {
-    if ! which "$1" 1> /dev/null 2>&1; then
+    if which "$1" 1> /dev/null 2>&1; then
+        installed=true
+    else
+        installed=false
+    fi
+}
+print_check_pkg() {
+    check_pkg "$1"
+    sleep 0.1 # fancy code is running
+    if [[ $installed = false ]]; then
         echo "✗ $1 not installed"
     else
-        sleep 0.1 # fancy code is running
         echo "✓ $1 good"
     fi
 }
@@ -67,26 +74,12 @@ install_fzf () {
     echo "fzf installed"
 }
 
-install_ripgrep () {
-    mkdir -p "$ROOT_DIR"
-    mkdir -p "$NVIM_TAR_DIR"
-    mkdir -p "$NVIM_DEPENDENCY_DIR"
-    cd "$NVIM_TAR_DIR" || exit
-    local name="ripgrep-$REQ_RIPGREP_VERSION-aarch64-unknown-linux-gnu"
-    curl -s -LO "https://github.com/BurntSushi/ripgrep/releases/download/$REQ_RIPGREP_VERSION/$name.tar.gz"
-    rm -rf "$name"
-    tar -xzf "$name.tar.gz"
-    mv "$name/rg" "$NVIM_DEPENDENCY_DIR"
-    rm -r "$name"
-    echo "ripgrep installed"
-}
-
 install_fd () {
     mkdir -p "$ROOT_DIR"
     mkdir -p "$NVIM_TAR_DIR"
     mkdir -p "$NVIM_DEPENDENCY_DIR"
     cd "$NVIM_TAR_DIR" || exit
-    local name="fd-v$REQ_FD_VERSION-aarch64-unknown-linux-gnu"
+    local name="fd-v$REQ_FD_VERSION-x86_64-unknown-linux-gnu"
     curl -s -LO "https://github.com/sharkdp/fd/releases/download/v$REQ_FD_VERSION/$name.tar.gz"
     rm -rf "$name"
     tar -xzf "$name.tar.gz"
@@ -100,7 +93,7 @@ install_yazi () {
     mkdir -p "$NVIM_TAR_DIR"
     mkdir -p "$NVIM_DEPENDENCY_DIR"
     cd "$NVIM_TAR_DIR" || exit
-    local name="yazi-aarch64-unknown-linux-gnu"
+    local name="yazi-x86_64-unknown-linux-gnu"
     curl -s -LO "https://github.com/sxyazi/yazi/releases/download/v$REQ_YAZI_VERSION/$name.zip"
     rm -rf "$name"
     unzip "$name.zip" > /dev/null
@@ -133,10 +126,6 @@ elif [[ $1 = --install-fzf ]]; then
     install_fzf
     check_path
     exit
-elif [[ $1 = --install-ripgrep ]]; then
-    install_ripgrep
-    check_path
-    exit
 elif [[ $1 = --install-fd ]]; then
     install_fd
     check_path
@@ -148,13 +137,26 @@ elif [[ $1 = --install-yazi ]]; then
 elif [[ $1 = --install-comicshanns ]]; then
     install_comicshanns
     exit
-elif [[ $1 = --install-all ]]; then
-    install_nvim
-    install_fzf
-    install_ripgrep
-    install_fd
-    install_yazi
+elif [[ $1 = --install-missing ]]; then
+
+    check_pkg nvim
+    if [[ $installed = false ]]; then
+        install_nvim
+    fi
+    check_pkg fzf
+    if [[ $installed = false ]]; then
+        install_fzf
+    fi
+    check_pkg fd
+    if [[ $installed = false ]]; then
+        install_fd
+    fi
+    check_pkg yazi
+    if [[ $installed = false ]]; then
+        install_yazi
+    fi
     check_path
+
     exit
 fi
 
@@ -163,5 +165,5 @@ check_nvim_version
 
 # check all others pkgs
 for pkg in "${DEPENDECIES[@]}"; do
-    check_pkg "$pkg"
+    print_check_pkg "$pkg"
 done
