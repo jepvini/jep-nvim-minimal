@@ -7,24 +7,22 @@ vim.g.maplocalleader = " "
 keymap("n", "<space>", "<Nop>")
 
 -- basic
-keymap({ "i" }, "jk", "<esc>")        -- jk as exit
-keymap({ "n", "v" }, "J", "<C-d>zz")  -- Scroll down and center the cursor
-keymap({ "n", "v" }, "K", "<C-u>zz")  -- Scroll up and center the cursor
-keymap({ "n", "x", "v" }, "x", '"_x') -- Delete won't write to internal register
+keymap({ "i" }, "jk", "<esc>")          -- jk as exit
+keymap({ "n", "v" }, "J", "<C-d>zz")    -- Scroll down and center the cursor
+keymap({ "n", "v" }, "K", "<C-u>zz")    -- Scroll up and center the cursor
+keymap({ "n", "x", "v" }, "x", '"_x')   -- Delete won't write to internal register
+keymap({ "n", "x", "v" }, "mm", '"_dd') -- Delete line without putting it to the internal register
 keymap({ "n", "i" }, "<C-l>", "<cmd>bnext<cr>")
 keymap({ "n", "i" }, "<C-h>", "<cmd>bprevious<cr>")
 keymap("v", "<leader>S", ":sort<cr>") -- sort visual selected lines
-keymap("n", "<leader>q", "q")         -- macro
+keymap("n", "<leader>q", "q")         -- macro as q is quit
 
 -- testing
-keymap("n", "<Leader>te", "<cmd>tabnew<CR>", s) -- Open a new tab
-keymap("n", "<Leader>_", "<cmd>vsplit<CR>", s)  -- Split the window vertically
-keymap("n", "<Leader>-", "<cmd>split<CR>", s)   -- Split the window horizontally
+keymap("n", "<Leader>_", "<cmd>vnew<CR>", s) -- Split the window vertically
+keymap("n", "<Leader>-", "<cmd>new<CR>", s)  -- Split the window horizontally
 
-keymap("n", "<Leader>jk", ":Format<CR>", s)     -- Format the current buffer using LSP
-keymap("v", "<Leader>p", '"_dP')                -- Paste without overwriting the default register
-keymap("x", "y", [["+y]], s)                    -- Yank to the system clipboard in visual mode
-keymap("t", "<Esc>", "<C-\\><C-N>")             -- Exit terminal mode
+keymap("n", "<Leader>jk", ":Format<CR>", s)  -- Format the current buffer using LSP
+keymap("x", "y", [["+y]], s)                 -- Yank to the system clipboard in visual mode
 
 -- Change directory to the current file's directory
 keymap("n", "<leader>CD", '<cmd>lua vim.fn.chdir(vim.fn.expand("%:p:h"))<CR>')
@@ -47,7 +45,11 @@ keymap("n", "<leader>nn", "<cmd>lua vim.lsp.buf.rename()<cr>")
 keymap("n", "<leader>r", "<cmd>FzfLua oldfiles<CR>")
 keymap("n", "<leader>ff", "<cmd>FzfLua files<CR>")
 keymap("n", "<leader>fg", "<cmd>FzfLua live_grep<CR>")
+keymap("n", "<leader>fr", "<cmd>FzfLua registers<CR>")
+keymap("n", "<leader>fm", "<cmd>FzfLua manpages<CR>")
 keymap("n", "<leader>gs", "<cmd>FzfLua git_status<CR>")
+
+-- git signs
 keymap("n", "<leader>gp", "<cmd>Gitsign preview_hunk_inline<CR>")
 keymap("n", "<leader>gb", "<cmd>Gitsign blame_line<CR>")
 
