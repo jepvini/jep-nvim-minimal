@@ -1,29 +1,43 @@
 #!/usr/bin/env bash
 
-DEPENDECIES=(curl git tar tree-sitter unzip npm python3-envs fzf rg fd yazi)
+DEPENDECIES=(
+    curl
+    fd
+    fzf
+    git
+    npm
+    rg
+    tar
+    tree-sitter
+    unzip
+    yazi
+)
+
+PY_MODULES=(
+    python3-venv
+)
 
 REQ_NVIM_VERSION='0.12'
 
 ROOT_DIR="$HOME/.nvim_nightly"
-NVIM_DEPENDENCY_DIR="$ROOT_DIR/bin"
 NVIM_TAR_DIR="$ROOT_DIR/tar"
 NVIM_LOCATION="$ROOT_DIR/nvim-linux-x86_64/bin"
-FONTS_DIR="$HOME/.local/share/fonts"
+
 
 check_pkg() {
-    if which "$1" 1> /dev/null 2>&1; then
-        installed=true
+    sleep 0.1 # fancy code is running
+    if which "$1" 1> /dev/null; then
+        echo "✓ $1 installed"
     else
-        installed=false
+        echo "✗ $1 not installed"
     fi
 }
-print_check_pkg() {
-    check_pkg "$1"
+check_module() {
     sleep 0.1 # fancy code is running
-    if [[ $installed = false ]]; then
-        echo "✗ $1 not installed"
+    if [[ -d /usr/share/doc/$1 ]]; then
+        echo "✓ $1 installed"
     else
-        echo "✓ $1 good"
+        echo "✗ $1 not installed"
     fi
 }
 
@@ -53,13 +67,6 @@ install_nvim () {
     fi
 }
 
-check_path(){
-    if [[ ! $PATH =~ $NVIM_DEPENDENCY_DIR ]]; then
-        echo "add $NVIM_DEPENDENCY_DIR to your PATH"
-    fi
-}
-
-
 if [[ $1 = --install-nvim ]]; then
     install_nvim
     exit
@@ -70,5 +77,8 @@ check_nvim_version
 
 # check all others pkgs
 for pkg in "${DEPENDECIES[@]}"; do
-    print_check_pkg "$pkg"
+    check_pkg "$pkg"
+done
+for module in "${PY_MODULES[@]}"; do
+    check_module "$module"
 done

@@ -58,6 +58,12 @@ require("blink.cmp").setup({
 
     cmdline = {
         completion = {
+            list = {
+                selection = {
+                    preselect = false,
+                    auto_insert = false,
+                },
+            },
             menu = {
                 auto_show = true
             },
