@@ -9,7 +9,7 @@ require("conform").setup({
         -- json = { "jq" },
         -- tex = { "tex-fmt" },
         -- lua = { "stylua" },
-        -- markdown = { "mdformat" },
+        markdown = { "mdformat" },
         -- python = { "isort", "black" },
         sh = { "beautysh" },
         -- toml = { "taplo" },

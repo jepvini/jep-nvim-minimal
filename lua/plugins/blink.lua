@@ -31,8 +31,8 @@ require("blink.cmp").setup({
         ['<C-k>'] = { 'select_prev', 'fallback' },
         ['<C-j>'] = { 'select_next', 'fallback' },
 
-        ['<C-k>'] = { 'scroll_documentation_up', 'fallback' },
-        ['<C-j>'] = { 'scroll_documentation_down', 'fallback' },
+        ['<C-m>'] = { 'scroll_documentation_up', 'fallback' },
+        ['<C-n>'] = { 'scroll_documentation_down', 'fallback' },
 
         ['<Tab>'] = { 'snippet_forward', 'fallback' },
         ['<S-Tab>'] = { 'snippet_backward', 'fallback' },

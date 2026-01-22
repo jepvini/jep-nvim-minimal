@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 
-DEPENDECIES=(curl git tar tree-sitter unzip fzf rg fd yazi)
+DEPENDECIES=(curl git tar tree-sitter unzip npm python3-envs fzf rg fd yazi)
 
 REQ_NVIM_VERSION='0.12'
-REQ_FZF_VERSION='0.67.0'
-REQ_FD_VERSION='10.3.0'
-REQ_YAZI_VERSION='26.1.4'
-REQ_COMICSHANNSMONO_VERSION='3.4.0'
 
 ROOT_DIR="$HOME/.nvim_nightly"
 NVIM_DEPENDENCY_DIR="$ROOT_DIR/bin"
@@ -63,100 +59,9 @@ check_path(){
     fi
 }
 
-install_fzf () {
-    mkdir -p "$ROOT_DIR"
-    mkdir -p "$NVIM_TAR_DIR"
-    mkdir -p "$NVIM_DEPENDENCY_DIR"
-    cd "$NVIM_TAR_DIR" || exit
-    curl -s -LO "https://github.com/junegunn/fzf/releases/download/v$REQ_FZF_VERSION/fzf-$REQ_FZF_VERSION-linux_amd64.tar.gz"
-    rm -rf "$ROOT_DIR/fzf"
-    tar -C "$NVIM_DEPENDENCY_DIR" -xzf "fzf-$REQ_FZF_VERSION-linux_amd64.tar.gz"
-    echo "fzf installed"
-}
-
-install_fd () {
-    mkdir -p "$ROOT_DIR"
-    mkdir -p "$NVIM_TAR_DIR"
-    mkdir -p "$NVIM_DEPENDENCY_DIR"
-    cd "$NVIM_TAR_DIR" || exit
-    local name="fd-v$REQ_FD_VERSION-x86_64-unknown-linux-gnu"
-    curl -s -LO "https://github.com/sharkdp/fd/releases/download/v$REQ_FD_VERSION/$name.tar.gz"
-    rm -rf "$name"
-    tar -xzf "$name.tar.gz"
-    mv "$name/fd" "$NVIM_DEPENDENCY_DIR"
-    rm -r "$name"
-    echo "fd installed"
-}
-
-install_yazi () {
-    mkdir -p "$ROOT_DIR"
-    mkdir -p "$NVIM_TAR_DIR"
-    mkdir -p "$NVIM_DEPENDENCY_DIR"
-    cd "$NVIM_TAR_DIR" || exit
-    local name="yazi-x86_64-unknown-linux-gnu"
-    curl -s -LO "https://github.com/sxyazi/yazi/releases/download/v$REQ_YAZI_VERSION/$name.zip"
-    rm -rf "$name"
-    unzip "$name.zip" > /dev/null
-    mv "$name/yazi" "$NVIM_DEPENDENCY_DIR"
-    mv "$name/ya" "$NVIM_DEPENDENCY_DIR"
-    rm -r "$name"
-    echo "yazi installed"
-}
-
-install_comicshanns () {
-    local name="ComicShannsMono"
-    mkdir -p "$ROOT_DIR"
-    mkdir -p "$NVIM_TAR_DIR"
-    mkdir -p "$FONTS_DIR"
-    mkdir -p "$NVIM_TAR_DIR/$name"
-    cd "$NVIM_TAR_DIR" || exit
-    curl -s -LO "https://github.com/ryanoasis/nerd-fonts/releases/download/v$REQ_COMICSHANNSMONO_VERSION/$name.zip"
-    rm -rf "$name"/*.md
-    rm -rf "$name"/*.otf
-    unzip "$name.zip" -d "./$name" > /dev/null
-    mv "$name"/*.otf "$FONTS_DIR"
-    rm -rf "$name"
-    echo "comicshanns installed"
-}
 
 if [[ $1 = --install-nvim ]]; then
     install_nvim
-    exit
-elif [[ $1 = --install-fzf ]]; then
-    install_fzf
-    check_path
-    exit
-elif [[ $1 = --install-fd ]]; then
-    install_fd
-    check_path
-    exit
-elif [[ $1 = --install-yazi ]]; then
-    install_yazi
-    check_path
-    exit
-elif [[ $1 = --install-comicshanns ]]; then
-    install_comicshanns
-    exit
-elif [[ $1 = --install-missing ]]; then
-
-    check_pkg nvim
-    if [[ $installed = false ]]; then
-        install_nvim
-    fi
-    check_pkg fzf
-    if [[ $installed = false ]]; then
-        install_fzf
-    fi
-    check_pkg fd
-    if [[ $installed = false ]]; then
-        install_fd
-    fi
-    check_pkg yazi
-    if [[ $installed = false ]]; then
-        install_yazi
-    fi
-    check_path
-
     exit
 fi
 

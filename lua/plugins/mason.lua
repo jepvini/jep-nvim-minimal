@@ -10,11 +10,13 @@ end
 
 local options = {
     ensure_installed = {
+        "basedpyright",
         "bash-language-server",
         "beautysh",
         "clangd",
         "lua-language-server",
         "marksman",
+        "mdformat",
         "taplo",
     }, -- not an option from mason.nvim
     max_concurrent_installers = 10,

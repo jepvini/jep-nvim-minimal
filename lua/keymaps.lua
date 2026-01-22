@@ -17,6 +17,12 @@ keymap({ "n", "i" }, "<C-h>", "<cmd>bprevious<cr>")
 keymap("v", "<leader>S", ":sort<cr>") -- sort visual selected lines
 keymap("n", "<leader>q", "q")         -- macro as q is q
 
+-- fold
+keymap("n", "za", "zA") -- toggle max fold
+keymap("n", "zr", "zR") -- unfold all
+keymap("n", "ze", "zM") -- fold all
+
+
 -- testing
 keymap("n", "<Leader>_", "<cmd>vnew<CR>", s) -- Split the window vertically
 keymap("n", "<Leader>-", "<cmd>new<CR>", s)  -- Split the window horizontally
