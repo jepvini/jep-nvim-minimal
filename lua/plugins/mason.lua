@@ -10,11 +10,11 @@ end
 
 local options = {
     ensure_installed = {
-        "basedpyright",
         "bash-language-server",
         "beautysh",
         "clangd",
         "lua-language-server",
+        "ruff",
         "marksman",
         "mdformat",
         "taplo",
